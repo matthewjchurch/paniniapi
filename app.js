@@ -5,7 +5,6 @@ import bodyParser from "body-parser";
 
 import { getCollectionDocuments } from "./db.js";
 import { createCollectionDocument } from "./db.js";
-import { updateCollectionDocument } from "./db.js";
 import { deleteCollectionDocument } from "./db.js";
 
 // 1. Create our express API
