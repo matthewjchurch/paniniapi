@@ -10,11 +10,11 @@ import { deleteCollectionDocument } from "./db.js";
 // 1. Create our express API
 const app = express();
 
-const PORT = process.env.PORT || 3000;
-
 // NOTE: let's allow requests from ALL ORIGINS
 app.use(cors());
 app.use(bodyParser.json());
+
+const PORT = process.env.PORT || 3000;
 
 app.get('/', async (request, response) => {
 
