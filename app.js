@@ -10,6 +10,8 @@ import { deleteCollectionDocument } from "./db.js";
 // 1. Create our express API
 const app = express();
 
+const PORT = process.env.PORT || 3000;
+
 // NOTE: let's allow requests from ALL ORIGINS
 app.use(cors());
 app.use(bodyParser.json());
@@ -32,5 +34,7 @@ app.delete('/delete', async (request, response) => {
     response.send({response: 'delete successful'});
 })
 
-// 3. Finally! Listen on Port 8080
-app.listen(8080);
+// 3. Finally! Listen on your port
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});
