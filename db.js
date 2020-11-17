@@ -4,12 +4,9 @@ dotenv.config();
 import mongodb from 'mongodb';
 const mongoClient = mongodb.MongoClient;
 
-console.log(process.env.DB_USERNAME);
-// let dbName = "players";
 let dbName = "players";
-// connection string
-// const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@trees.bnyoy.mongodb.net/vulis_db?retryWrites=true&w=majority`;
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.xmfro.mongodb.net/players?retryWrites=true&w=majority`
+
 export const getCollectionDocuments = async (collectionName) => {
     // Connect to our database / open our connection
     const mongo = await mongoClient.connect(uri, { useUnifiedTopology: true })
