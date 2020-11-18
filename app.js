@@ -1,4 +1,5 @@
 import http from 'http';
+import axios from "axios";
 import https from 'https';
 import cors from 'cors';
 import express from 'express';
@@ -17,32 +18,27 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3000;
 
-app.get("/ffdata", (request, response) => {
-
+app.get("/ffdata", async (request, response) => {
     https.get("https://fantasy.premierleague.com/api/bootstrap-static/", (resp) => {
         let data = '';
 
         // A chunk of data has been recieved.
-        resp.on('data', (chunk) => {
-            data += chunk;
-        });
+        resp.on('data', (chunk) => data += chunk);
 
         // The whole response has been received. Send the result as JSON.
-        let JSONData = {};
-
-        resp.on('end', () => JSONData = JSON.parse(data));
-
-        response.send(JSONData)
+        resp.on('end', () => {
+            let JSONData = JSON.parse(data);
+            let customResponse = {
+                "players": JSONData.elements,
+                "teams": JSONData.teams
+            };
+            response.send(customResponse);
+        });        
     }).on("error", (err) => {
         console.log("Error: " + err.message);
     });
-
-    // response.send(JSONData)
 })
 
-// const getFantastyData = async () => {
-//    return await https.get("https://fantasy.premierleague.com/api/bootstrap-static/").
-// }
 
 app.get('/', async (request, response) => {
     const getPlayers = await getCollectionDocuments('players');
@@ -62,7 +58,7 @@ app.delete('/delete', async (request, response) => {
 })
 
 // 3. Finally! Listen on your port
-// app.listen(PORT, () => {
-//     console.log(`Our app is running on port ${ PORT }`);
-// });
-app.listen(8080);
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});
+// app.listen(8080);
