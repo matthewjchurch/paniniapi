@@ -43,22 +43,21 @@ app.get("/ffdata", async (request, response) => {
     });
 })
 
-app.get('/', async (request, response) => {
-    const getPlayers = await getCollectionDocuments('players');
+app.get('/getWatchlist', async (request, response) => {
+    const user = request.body;
+    console.log(user);
     response.send(getPlayers[Math.floor(Math.random() * Math.floor(getPlayers.length))]);
     // response.send(getPlayers)
 })
 
 app.post('/createUser', async (request, response) => {
     const createUser = request.body;
-    console.log(createUser);
     const posting = await createCollectionDocument('users', createUser);
     response.send(createUser);
 });
 
 app.post('/addPlayer', async (request, response) => {
     const data = request.body;
-    console.log(data);
     const posting = await updateCollectionDocument('users', data);
     response.send(data);
 })
@@ -69,7 +68,7 @@ app.delete('/delete', async (request, response) => {
 })
 
 // 3. Finally! Listen on your port
-// app.listen(PORT, () => {
-//     console.log(`Our app is running on port ${ PORT }`);
-// });
-app.listen(8080);
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});
+// app.listen(8080);
