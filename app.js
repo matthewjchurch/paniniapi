@@ -5,9 +5,13 @@ import cors from 'cors';
 import express from 'express';
 import bodyParser from "body-parser";
 
-import { getCollectionDocuments } from "./db.js";
-import { createCollectionDocument } from "./db.js";
-import { deleteCollectionDocument } from "./db.js";
+import { 
+    getCollectionDocuments,
+    createCollectionDocument,
+    deleteCollectionDocument,
+    updateCollectionDocument
+} from "./db.js";
+
 
 // 1. Create our express API
 const app = express();
@@ -50,6 +54,13 @@ app.post('/createUser', async (request, response) => {
     console.log(createUser);
     const posting = await createCollectionDocument('users', createUser);
     response.send(createUser);
+});
+
+app.post('/addPlayer', async (request, response) => {
+    const data = request.body;
+    console.log(data);
+    const posting = await updateCollectionDocument('users', data);
+    response.send(data);
 })
 
 app.delete('/delete', async (request, response) => {
@@ -58,7 +69,7 @@ app.delete('/delete', async (request, response) => {
 })
 
 // 3. Finally! Listen on your port
-app.listen(PORT, () => {
-    console.log(`Our app is running on port ${ PORT }`);
-});
-// app.listen(8080);
+// app.listen(PORT, () => {
+//     console.log(`Our app is running on port ${ PORT }`);
+// });
+app.listen(8080);

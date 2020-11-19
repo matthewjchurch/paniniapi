@@ -19,34 +19,23 @@ export const getCollectionDocuments = async (collectionName) => {
 export const createCollectionDocument = async (collectionName, data) => {
     // Connect to our database / open our connection
     const mongo = await mongoClient.connect(uri, { useUnifiedTopology: true })
-    // const existingPlayer = await mongo.db('players').collection('players').find({data});
-    // console.log(existingPlayer);
-    // Create our document
-    // if (!existingPlayer){
         if (!data._id) {
             data._id = data.uid;
             await mongo.db(dbName).collection(collectionName).insertOne(data)
         } else {
             updateCollectionDocument(collectionName, data);
         } 
-    // } else {
-    //     response.send({response: "player already exists"})
-    // }
-    // Close our connection
     mongo.close();
 }
 export const updateCollectionDocument = async (collectionName, data) => {
-    // Connect to our database / open our connection
     const mongo = await mongoClient.connect(uri, { useUnifiedTopology: true })
-    // Retrieve our collection
-    var myquery = { _id: new mongodb.ObjectID(data._id) };
-    var newvalues = { $set: data };
-    await mongo.db(dbName).collection(collectionName).replaceOne(
-        { _id : data._id },
-        data, 
-        { upsert: true} 
-    );
-    // Close our connection
+    
+    await mongo.db(dbName).collection(collectionName).updateOne(
+        { uid: data.uid },
+        {
+            $addToSet: { watchlist: data }, //addToSet only pushes if the value isn't present
+        }
+    )
     mongo.close();
 }
 export const deleteCollectionDocument = async (collectionName, data) => {
