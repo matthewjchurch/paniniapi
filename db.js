@@ -24,7 +24,7 @@ export const createCollectionDocument = async (collectionName, data) => {
     // Create our document
     // if (!existingPlayer){
         if (!data._id) {
-            data._id = new mongodb.ObjectID().toString();
+            data._id = data.uid;
             await mongo.db(dbName).collection(collectionName).insertOne(data)
         } else {
             updateCollectionDocument(collectionName, data);

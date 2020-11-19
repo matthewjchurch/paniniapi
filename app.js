@@ -39,21 +39,21 @@ app.get("/ffdata", async (request, response) => {
     });
 })
 
-
 app.get('/', async (request, response) => {
     const getPlayers = await getCollectionDocuments('players');
     response.send(getPlayers[Math.floor(Math.random() * Math.floor(getPlayers.length))]);
     // response.send(getPlayers)
 })
 
-app.post('/create', async (request, response) => {
-    const createPlayer = request.body;
-    const posting = await createCollectionDocument('players', createPlayer);
-    response.send(createPlayer);
+app.post('/createUser', async (request, response) => {
+    const createUser = request.body;
+    console.log(createUser);
+    const posting = await createCollectionDocument('users', createUser);
+    response.send(createUser);
 })
 
 app.delete('/delete', async (request, response) => {
-    const deletePlayer = await deleteCollectionDocument('players', request.body.name)
+    const deletePlayer = await deleteCollectionDocument('users', request.body.uid)
     response.send({response: 'delete successful'});
 })
 
