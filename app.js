@@ -43,11 +43,10 @@ app.get("/ffdata", async (request, response) => {
     });
 })
 
-app.get('/getWatchlist', async (request, response) => {
-    const user = request.body;
-    console.log(user);
-    response.send(getPlayers[Math.floor(Math.random() * Math.floor(getPlayers.length))]);
-    // response.send(getPlayers)
+app.post('/getWatchlist', async (request, response) => {
+    const data = request.body;
+    const watchlist = await getCollectionDocuments("users", data);
+    response.send(watchlist)
 })
 
 app.post('/createUser', async (request, response) => {

@@ -7,11 +7,11 @@ const mongoClient = mongodb.MongoClient;
 let dbName = "players";
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.xmfro.mongodb.net/players?retryWrites=true&w=majority`
 
-export const getCollectionDocuments = async (collectionName) => {
+export const getCollectionDocuments = async (collectionName, data) => {
     // Connect to our database / open our connection
     const mongo = await mongoClient.connect(uri, { useUnifiedTopology: true })
     // Retrieve our collection
-    const dataCollection = await mongo.db(dbName).collection(collectionName).find({}).toArray();
+    const dataCollection = await mongo.db(dbName).collection(collectionName).find({uid: data.uid}).toArray();
     // Close our connection
     mongo.close();
     return dataCollection;
