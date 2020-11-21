@@ -1,3 +1,3 @@
-This api was built in node.js and accepts requests for footballer data.
+This api was built in node.js and accepts requests for fantasy football data, and allows the user to watch players by reading and writing from their own mongoDB document.
 
-The frontend is built here matthewjchurch/paninicards, and will allow the user to search for, add or remove the cards.
+The frontend is built here: matthewjchurch/paninicards.
