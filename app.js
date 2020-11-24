@@ -61,8 +61,10 @@ app.post('/addPlayer', async (request, response) => {
     response.send(data);
 })
 
-app.delete('/delete', async (request, response) => {
-    const deletePlayer = await deleteCollectionDocument('users', request.body.uid)
+app.delete('/removePlayer', async (request, response) => {
+    console.log("hello");
+    console.log(request.body);
+    const deletePlayer = await deleteCollectionDocument('users', request.body)
     response.send({response: 'delete successful'});
 })
 

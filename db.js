@@ -43,9 +43,9 @@ export const deleteCollectionDocument = async (collectionName, data) => {
     const mongo = await mongoClient.connect(uri, { useUnifiedTopology: true })
     // Retrieve our collection
     try {
-        await mongo.db(dbName).collection(collectionName).deleteOne(
-            { name : data }
-        );
+        await mongo.db(dbName).collection(collectionName)
+            .updateOne({ uid: data.uid },
+            { $pull: { 'watchlist': { id: data.id } } })
     } catch(e) {
         console.log(e);
     }
