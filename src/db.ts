@@ -4,10 +4,10 @@ dotenv.config();
 import mongodb from 'mongodb';
 const mongoClient = mongodb.MongoClient;
 
-let dbName = "players";
+const dbName = "players";
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.xmfro.mongodb.net/players?retryWrites=true&w=majority`
 
-export const getCollectionDocuments = async (collectionName, data) => {
+export const getCollectionDocuments = async (collectionName: string, data: any) => {
     // Connect to our database / open our connection
     const mongo = await mongoClient.connect(uri, { useUnifiedTopology: true })
     // Retrieve our collection
@@ -16,7 +16,7 @@ export const getCollectionDocuments = async (collectionName, data) => {
     mongo.close();
     return dataCollection;
 }
-export const createCollectionDocument = async (collectionName, data) => {
+export const createCollectionDocument = async (collectionName: string, data: any) => {
     // Connect to our database / open our connection
     const mongo = await mongoClient.connect(uri, { useUnifiedTopology: true })
         if (!data._id) {
@@ -24,21 +24,21 @@ export const createCollectionDocument = async (collectionName, data) => {
             await mongo.db(dbName).collection(collectionName).insertOne(data)
         } else {
             updateCollectionDocument(collectionName, data);
-        } 
+        }
     mongo.close();
 }
-export const updateCollectionDocument = async (collectionName, data) => {
+export const updateCollectionDocument = async (collectionName: string, data: any) => {
     const mongo = await mongoClient.connect(uri, { useUnifiedTopology: true })
-    
+
     await mongo.db(dbName).collection(collectionName).updateOne(
         { uid: data.uid },
         {
-            $addToSet: { watchlist: data }, //addToSet only pushes if the value isn't present
+            $addToSet: { watchlist: data }, // addToSet only pushes if the value isn't present
         }
     )
     mongo.close();
 }
-export const deleteCollectionDocument = async (collectionName, data) => {
+export const deleteCollectionDocument = async (collectionName: string, data: any) => {
     // Connect to our database / open our connection
     const mongo = await mongoClient.connect(uri, { useUnifiedTopology: true })
     // Retrieve our collection
@@ -47,7 +47,7 @@ export const deleteCollectionDocument = async (collectionName, data) => {
             .updateOne({ uid: data.uid },
             { $pull: { 'watchlist': { id: data.id } } })
     } catch(e) {
-        console.log(e);
+        alert(e);
     }
     // Close our connection
     mongo.close();
