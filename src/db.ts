@@ -52,3 +52,5 @@ export const deleteCollectionDocument = async (collectionName: string, data: any
     // Close our connection
     mongo.close();
 }
+
+module.exports = {}
