@@ -24,8 +24,8 @@ app.post('/addPlayer', addPlayer);
 app.delete('/removePlayer', removePlayer)
 
 // 3. Finally! Listen on your port
-// app.listen(PORT, () => {
-//     // tslint:disable-next-line:no-console
-//     console.log(`Our app is running on port ${ PORT }`);
-// });
-app.listen(8080);
+app.listen(PORT, () => {
+    // tslint:disable-next-line:no-console
+    console.log(`Our app is running on port ${ PORT }`);
+});
+// app.listen(8080);
