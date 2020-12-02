@@ -18,6 +18,6 @@ export const getFFData = ( async (request: Request, response: Response) => {
             response.send(customResponse);
         });
     }).on("error", (err) => {
-        alert("Error: " + err.message);
+        return "Error: " + err.message;
     });
 })

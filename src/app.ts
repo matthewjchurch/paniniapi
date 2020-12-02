@@ -1,8 +1,8 @@
 import cors from "cors";
 import express from 'express';
 import bodyParser from "body-parser";
-import { getFFData } from "./controllers/fantasyController";
-import { getWatchlist, createUser, addPlayer, removePlayer } from "./controllers/mongoController";
+import { getFFData } from "./controllers/fantasyController.js";
+import * as mongoController from "./controllers/mongoController.js";
 
 // 1. Create our express API
 const app: express.Application = express();
@@ -15,13 +15,13 @@ const PORT = process.env.PORT || 3000;
 
 app.get("/ffdata", getFFData)
 
-app.post('/getWatchlist', getWatchlist);
+app.post('/getWatchlist', mongoController.getWatchlist);
 
-app.post('/createUser', createUser);
+app.post('/createUser', mongoController.createUser);
 
-app.post('/addPlayer', addPlayer);
+app.post('/addPlayer', mongoController.addPlayer);
 
-app.delete('/removePlayer', removePlayer)
+app.delete('/removePlayer', mongoController.removePlayer)
 
 // 3. Finally! Listen on your port
 app.listen(PORT, () => {
@@ -29,5 +29,3 @@ app.listen(PORT, () => {
     console.log(`Our app is running on port ${ PORT }`);
 });
 // app.listen(8080);
-
-module.exports = {}

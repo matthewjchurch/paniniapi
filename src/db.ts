@@ -47,10 +47,8 @@ export const deleteCollectionDocument = async (collectionName: string, data: any
             .updateOne({ uid: data.uid },
             { $pull: { 'watchlist': { id: data.id } } })
     } catch(e) {
-        alert(e);
+        return e;
     }
     // Close our connection
     mongo.close();
 }
-
-module.exports = {}

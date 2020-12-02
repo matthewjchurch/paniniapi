@@ -4,13 +4,13 @@ import {
     createCollectionDocument,
     deleteCollectionDocument,
     updateCollectionDocument
-} from "../db";
+} from "../db.js";
 
-export const getWatchlist = ( async (request: Request, response: Response) => {
+export const getWatchlist = async (request: Request, response: Response) => {
     const data: {} = request.body;
     const watchlist = await getCollectionDocuments("users", data);
     response.send(watchlist)
-});
+};
 
 export const createUser = ( async (request: Request, response: Response) => {
     const user: {} = request.body;
