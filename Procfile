@@ -1,1 +1,1 @@
-web: "ts-node-dev src/app.ts"
+web: "npm run dev"
