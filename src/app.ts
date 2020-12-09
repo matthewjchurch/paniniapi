@@ -1,7 +1,7 @@
 import cors from "cors";
 import express from 'express';
 import bodyParser from "body-parser";
-import { getFFData } from "./controllers/fantasyController.js";
+import { getFFData, getTeamFixtures, getTeamID } from "./controllers/fantasyController.js";
 import * as mongoController from "./controllers/mongoController.js";
 
 // 1. Create our express API
@@ -13,7 +13,11 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3000;
 
-app.get("/ffdata", getFFData)
+app.get("/ffdata", getFFData);
+
+app.post("/getTeamID", getTeamID);
+
+app.post("/getTeamFixtures", getTeamFixtures);
 
 app.post('/getWatchlist', mongoController.getWatchlist);
 

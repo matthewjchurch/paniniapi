@@ -40,8 +40,6 @@ export var getWatchlist = function (request, response) { return __awaiter(void 0
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                // tslint:disable-next-line:no-console
-                console.log(getCollectionDocuments);
                 data = request.body;
                 return [4 /*yield*/, getCollectionDocuments("users", data)];
             case 1:
