@@ -61,7 +61,7 @@ export const getTeamFixtures = ( async (request: Request, response: Response) =>
         .then((res: any) => res.json())
         .then((res: any) => {
             if (res.matches) {
-                response.send(res.matches.slice(0, 3))
+                response.send(res.matches)
             }
         });
     });

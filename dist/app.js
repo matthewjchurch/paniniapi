@@ -17,9 +17,9 @@ app.post('/createUser', mongoController.createUser);
 app.post('/addPlayer', mongoController.addPlayer);
 app.delete('/removePlayer', mongoController.removePlayer);
 // 3. Finally! Listen on your port
-app.listen(PORT, function () {
-    // tslint:disable-next-line:no-console
-    console.log("Our app is running on port " + PORT);
-});
-// app.listen(8080);
+// app.listen(PORT, () => {
+//     // tslint:disable-next-line:no-console
+//     console.log(`Our app is running on port ${ PORT }`);
+// });
+app.listen(8080);
 //# sourceMappingURL=app.js.map

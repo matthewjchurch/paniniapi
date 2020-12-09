@@ -96,7 +96,7 @@ export var getTeamFixtures = (function (request, response) { return __awaiter(vo
             .then(function (res) { return res.json(); })
             .then(function (res) {
             if (res.matches) {
-                response.send(res.matches.slice(0, 3));
+                response.send(res.matches);
             }
         });
         return [2 /*return*/];
