@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import { Request, Response } from "express";
 import fetch from "node-fetch";
 import https from 'https';
@@ -25,11 +27,12 @@ export const getFFData = ( async (request: Request, response: Response) => {
 
 export const getTeamID = ( async (request: Request, response: Response) => {
     const team: string = request.body.id;
+    const token: string = (process.env.FANTASY_KEY as string);
 
     const fetchOptions = {
         method: "GET",
         headers: {
-            "X-Auth-Token": "7973a2a3a35041f0a8b148238189eb14"
+            "X-Auth-Token": token
         },
     }
 
@@ -45,11 +48,12 @@ export const getTeamID = ( async (request: Request, response: Response) => {
 
 export const getTeamFixtures = ( async (request: Request, response: Response) => {
     const teamID: string = request.body.id;
+    const token: string = (process.env.FANTASY_KEY as string);
 
     const fetchOptions = {
         method: "GET",
         headers: {
-            "X-Auth-Token": "7973a2a3a35041f0a8b148238189eb14"
+            "X-Auth-Token": token
         },
     }
 

@@ -34,6 +34,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+import dotenv from 'dotenv';
+dotenv.config();
 import fetch from "node-fetch";
 import https from 'https';
 export var getFFData = (function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
@@ -58,13 +60,14 @@ export var getFFData = (function (request, response) { return __awaiter(void 0, 
     });
 }); });
 export var getTeamID = (function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var team, fetchOptions;
+    var team, token, fetchOptions;
     return __generator(this, function (_a) {
         team = request.body.id;
+        token = process.env.FANTASY_KEY;
         fetchOptions = {
             method: "GET",
             headers: {
-                "X-Auth-Token": "7973a2a3a35041f0a8b148238189eb14"
+                "X-Auth-Token": token
             },
         };
         fetch("https://api.football-data.org/v2/competitions/2021/teams", fetchOptions)
@@ -79,13 +82,14 @@ export var getTeamID = (function (request, response) { return __awaiter(void 0, 
     });
 }); });
 export var getTeamFixtures = (function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var teamID, fetchOptions;
+    var teamID, token, fetchOptions;
     return __generator(this, function (_a) {
         teamID = request.body.id;
+        token = process.env.FANTASY_KEY;
         fetchOptions = {
             method: "GET",
             headers: {
-                "X-Auth-Token": "7973a2a3a35041f0a8b148238189eb14"
+                "X-Auth-Token": token
             },
         };
         fetch("https://api.football-data.org/v2/teams/" + teamID + "/matches/?status=SCHEDULED&competitions=2021", fetchOptions)
